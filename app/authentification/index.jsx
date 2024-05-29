@@ -1,10 +1,13 @@
-import React, { useState } from "react"
+import React, { useContext, useState } from "react"
 import {View , Text} from "react-native"
 import InputAvecError from "../../components/inputAvecError";
 import Bouton from "../../components/Bouton.jsx";
 import { Link } from "expo-router";
+import PassWordInput from "../../components/passWordInput.jsx";
+import{EmailContext} from "../_layout.jsx"
 
 export default function Connexion(){
+    const{user,setUser}=useContext(EmailContext)
     const[userEmail,setUserEmail]=useState("")
     const[userEmailError,setUserEmailError]=useState("")
 
@@ -35,6 +38,10 @@ export default function Connexion(){
         }else{
             alert("Vous êtes connecté")
         }
+        //Envoyer une requête à la backend
+        setUser({
+            email:userEmail
+        })
     }
 
     return (
@@ -43,7 +50,7 @@ export default function Connexion(){
         <InputAvecError placeholder={"Email"} action={InsertionEmail}
         type="email-address"
         error={userEmailError} ></InputAvecError>
-        <InputAvecError placeholder={"Mot de passe"} action={InsertionPasseWord} type="password" error={passWordErr}></InputAvecError>
+        <PassWordInput placeholder={"Mot de passe"} action={InsertionPasseWord} error={passWordErr}></PassWordInput>
         <Bouton label={"Connexion"} action={submit}></Bouton>
     </View>
 

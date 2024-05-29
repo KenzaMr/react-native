@@ -1,9 +1,13 @@
 import {Drawer} from "expo-router/drawer"
 import{GestureHandlerRootView} from "react-native-gesture-handler"
+import{createContext, useState} from "react"
 
+export const EmailContext=createContext()
 export default function RootLayout(){
+  const[user,setUser]=useState(null)
   return (
-    <GestureHandlerRootView>
+    <EmailContext.Provider value={{user,setUser}}>
+       <GestureHandlerRootView>
     <Drawer
     screenOptions={{
       headerStyle:{
@@ -15,7 +19,7 @@ export default function RootLayout(){
       headerTintColor:"whitesmoke"
     }}
     >
-      <Drawer.Screen 
+      <Drawer.Screen
       name="index"
       options={{
         drawerLabel:"Accueil",
@@ -27,6 +31,8 @@ export default function RootLayout(){
       />
     </Drawer>
   </GestureHandlerRootView>
+    </EmailContext.Provider>
+   
     // <Stack>
     //   <Stack.Screen name='index' />
     //   <Stack.Screen name='contact' />
@@ -39,3 +45,8 @@ export default function RootLayout(){
 //Navigation en Stack (Pile)
 //Navigation en Drawer (Tirroire, menu qui sort de la droite)
 //Navigation en Tab (Onglets)
+
+// layout principale:
+// Créer un context
+// Ajouter une variable d'atat user et setUser
+// Ajouter le Provider avec les valeur user et setUser
