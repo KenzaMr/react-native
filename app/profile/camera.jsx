@@ -32,7 +32,7 @@ export default function camera(params) {
     }
     return(
         <View>
-            <CameraView style={style.camera} type={type} flash={flash}></CameraView>
+            <CameraView style={style.camera} facing={type} enableTorch={flash}></CameraView>
             <Button onPress={toggleCameraType} title='Caméra'></Button>
             <Button onPress={flashCameraType} title='Flash'></Button>
             <Button onPress={zoomCameraType} title='Zoom'></Button>
